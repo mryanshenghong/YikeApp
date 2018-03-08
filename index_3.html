@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>豆瓣一刻</title>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./public/less/main.css">
+    <script src="./public/js/jquery-3.3.1.min.js"></script>
+    <script src="./public/js/angular.js"></script>
+    <script src="./public/js/angular-route.js"></script>
+    <!--AngularJs 入口-->
+    <script src="./scripts/app.js"></script>
+    <!--总控制器模块-->
+    <script src="./scripts/controllers.js"></script>
+</head>
+<body ng-app="Yike">
+<div class="viewport">
+    <!-- 侧边导航 -->
+    <div ng-class="{navs: true, collapse: collapsed}" ng-click="toggle()" ng-controller="NavController">
+        <dl>
+            <dt class="login">
+                <div class="avatar">
+                    <img src="./public/images/avatar.png" alt="">
+                </div>
+                <span>登录</span>
+            </dt>
+            <dd ng-class="{active: key == index}" ng-repeat="(key,nav) in navs">
+                <a href="{{nav.link}}" class="{{nav.icon}}">
+                    <span>{{nav.text}}</span>Y
+                </a>
+            </dd>
+        </dl>
+        <div class="extra">
+            <a href="javascript:;" class="icon-image">夜晚</a>
+            <a href="javascript:;" class="icon-download">离线</a>
+        </div>
+    </div>
+    <div class="container">
+        <!-- 头部 -->
+        <div ng-class="{header:true, collapse: collapsed}" ng-click="toggle()">
+            <a href="javascript:;" class="menu icon-menu"></a>
+            <h2>{{title}}</h2>
+            <a href="javascript:;" class="search icon-search"></a>
+        </div>
+        <!-- 主体 -->
+        <div ng-class="{body:true, collapse: collapsed}">
+            <img class="loading" ng-hide="loaded" src="./public/images/loading.gif" alt="">
+            <!--占位符-->
+            <div ng-view></div>Y
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+
+        var auto_follow = function (up,down) {
+            var current = null;
+            return function () {
+                $(window).scroll(function () {
+                    var current_height = document.documentElement.clientHeight;
+                    var begin = up * current_height / 100;
+                    var end = down * current_height / 100;
+                    if (current) {
+                        var current_top = current.getBoundingClientRect().top;
+                        var current_bottom = current.getBoundingClientRect().bottom;
+                        if ((current_top > begin && current_top < end) || (current_bottom > begin && current_bottom < end))
+                            return;
+                    }
+                    $.each($(".posts div[class='cont']"), function (index, value) {
+                        var top = value.getBoundingClientRect().top;
+                        var bottom = value.getBoundingClientRect().bottom;
+                        if ((top > begin && top < end) || (bottom > begin && bottom < end)) {
+                            $(current).css("background-color", "");
+                            current = value;
+                            $(current).css("background-color", "red");
+                            return false;
+                        }
+                    });
+                });
+            }
+        };
+
+
+    auto_follow(48,52)();
+
+
+
+    });
+
+</script>
+
+
+</body>
+</html>

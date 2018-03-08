@@ -1,0 +1,36 @@
+
+				<dl class="author">
+					<dt ng-show="rec.authors.length>0">本周推荐</dt>
+					<dd ng-repeat="author in rec.authors" ng-click="detail(author.url)">
+						<div class="avatar">
+							<img ng-src="{{author.avatar}}" alt="">
+						</div>
+						<div class="info">
+							<h5>{{author.name}}</h5>
+							<p>{{author.alt}}</p>
+						</div>
+					</dd>
+					<dt ng-show="all.authors.length>0">热门作者</dt>
+					<dd ng-repeat="author in all.authors">
+						<div class="avatar">
+							<img ng-src="{{author.avatar}}" alt="">
+						</div>
+						<div class="info">
+							<h5>{{author.name}}</h5>
+							<p>{{author.alt}}</p>
+						</div>
+					</dd>
+				</dl>
+				<div class="loadAll" style="text-align: center" ng-show="loaded"><a href="javascript:;" ng-click="loadAll()">加载全部作者</a></div>
+				<dl class="author">
+					<dt ng-show="AllAuthors.length>0">全部作者</dt>
+					<dd ng-repeat="allAuthor in allAuthors" ng-click="detail(allAuthor.url)">
+						<div class="avatar">
+							<img ng-src="{{allAuthor.avatar}}" alt="">
+						</div>
+						<div class="info">
+							<h5>{{allAuthor.name}}</h5>
+							<p>{{allAuthor.alt}}</p>
+						</div>
+					</dd>
+				</dl>

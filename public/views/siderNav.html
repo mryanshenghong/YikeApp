@@ -1,0 +1,19 @@
+<div ng-class="{navs: true, collapse: collapsed}" ng-click="toggle()">
+    <dl>
+        <dt class="login">
+            <div class="avatar">
+                <img src="./public/images/avatar.png" alt="">
+            </div>
+            <span>登录</span>
+        </dt>
+        <dd ng-class="{active: key == index}" ng-repeat="(key,nav) in navs">
+            <a href="{{nav.link}}" class="{{nav.icon}}">
+                <span>{{nav.text}}</span>
+            </a>
+        </dd>
+    </dl>
+    <div class="extra">
+        <a href="javascript:;" class="icon-image">夜晚</a>
+        <a href="javascript:;" class="icon-download">离线</a>
+    </div>
+</div>
